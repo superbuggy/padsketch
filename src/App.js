@@ -30,18 +30,46 @@ export default class App extends Component {
       this.triggerSample
     ).toMaster()
 
+    // TODO: .sync to Tone.Transport
+
     this.setState( _ => ({ sampler }) )
   }
   
-  triggerSample = (samples) => {
+  triggerKick = (samples) => {
     this.state.sampler.triggerAttack('C3')
-    this.state.sampler.triggerAttack('C#3')
+    // this.state.sampler.triggerAttack('C#3')
+  }
+
+  triggerSnare = (samples) => {
+    this.state.sampler.triggerAttack('D3')
+    // this.state.sampler.triggerAttack('D#3')
+    // this.state.sampler.triggerAttack('E3')
+    // this.state.sampler.triggerAttack('F3')
+  }
+  
+  triggerClosedHats = (samples) => {
+    this.state.sampler.triggerAttack('F#3')
+  }
+  
+  triggerOpenHats = (samples) => {
+    this.state.sampler.triggerAttack('G3')
+  }
+
+  triggerRide = (samples) => {
+    this.state.sampler.triggerAttack('G#3')
+    // this.state.sampler.triggerAttack('A3')
+    // this.state.sampler.triggerAttack('A#3')
+    // this.state.sampler.triggerAttack('B3')
   }
 
   render () {
     return (
       <div>
-        <button onClick={this.triggerSample}> Start </button>
+        <button onClick={this.triggerKick}> Kick </button>
+        <button onClick={this.triggerSnare}> Snare </button>
+        <button onClick={this.triggerClosedHats}> Open Hat </button>
+        <button onClick={this.triggerOpenHats}> Closed Hat </button>
+        <button onClick={this.triggerRide}> Ride </button>
       </div>
     )
   }
