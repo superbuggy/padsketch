@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import Tone from 'tone'
 
-export default class App extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      sampler: null
-    }
+export default class Sampler extends Component {
+  state = {
+      sampler: null,
   }
+
+  transport = Tone.Transport
 
   componentDidMount () {
     const sampleMap = {
@@ -28,11 +27,13 @@ export default class App extends Component {
     const sampler = new Tone.Sampler(
       sampleMap,
       this.triggerSample
-    ).toMaster()
-
-    // TODO: .sync to Tone.Transport
-
+    ).sync()
+    sampler.toMaster()
     this.setState( _ => ({ sampler }) )
+  }
+
+  startTransport = () => {
+    this.transport.start()
   }
   
   triggerKick = (samples) => {
@@ -65,6 +66,7 @@ export default class App extends Component {
   render () {
     return (
       <div>
+        <button onClick={this.startTransport}> Start </button>
         <button onClick={this.triggerKick}> Kick </button>
         <button onClick={this.triggerSnare}> Snare </button>
         <button onClick={this.triggerClosedHats}> Open Hat </button>
