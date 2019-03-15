@@ -10,36 +10,38 @@ export default class App extends Component {
   }
 
   componentDidMount () {
-    const component = this
-    Tone.Transport.start(0)
-    // Tone.Transport.start()
-    const sampler = new Tone.Sampler(
-      {
-        'C3': '/samples/01kick.wav',
-        'C#3': '/samples/02 kick2.wav'
-      },
-      function (samples) {
-        console.log('oh damn', samples, component)
-        // sampler.triggerAttack('C3')
-        component.setState(
-          _ => ({ sampler }),
-          function () {
-            this.state.sampler.triggerAttack('C3')
-            console.log(this.state)
-          }
-        )
-      }// .bind(this)
-    )
-  }
+    const sampleMap = {
+      'C3': '/samples/01kick.wav',
+      'C#3': '/samples/02 kick2.wav',
+      'D3' : '/samples/04 snare1.wav',
+      'D#3' : '/samples/05 snare2.wav',
+      'E3' : '/samples/06 snare3.wav',
+      'F3' : '/samples/07 snare4.wav',
+      'F#3' : '/samples/08 hihatclosed.wav',
+      'G3' : '/samples/09 hihatwayopen.wav',
+      'G#3' : '/samples/10 rideping1.wav',
+      'A3' : '/samples/11 rideping2.wav',
+      'A#3' : '/samples/12 rideping3.wav',
+      'B3' : '/samples/13 rideping4.wav',
+    }
 
-  componentDidUpdate () {
-    console.log(this.state)
+    const sampler = new Tone.Sampler(
+      sampleMap,
+      this.triggerSample
+    ).toMaster()
+
+    this.setState( _ => ({ sampler }) )
+  }
+  
+  triggerSample = (samples) => {
+    this.state.sampler.triggerAttack('C3')
+    this.state.sampler.triggerAttack('C#3')
   }
 
   render () {
     return (
       <div>
-        {''}
+        <button onClick={this.triggerSample}> Start </button>
       </div>
     )
   }
