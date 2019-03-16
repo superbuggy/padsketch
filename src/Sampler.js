@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Tone from 'tone'
 
+import GridContainer from './GridContainer'
 export default class Sampler extends Component {
   state = {
       sampler: null,
@@ -80,6 +81,14 @@ export default class Sampler extends Component {
         <button onClick={this.triggerClosedHats}> Open Hat </button>
         <button onClick={this.triggerOpenHats}> Closed Hat </button>
         <button onClick={this.triggerRide}> Ride </button>
+        <GridContainer
+          instruments={this.instruments}
+          triggerKick={this.triggerKick}
+          triggerSnare={this.triggerSnare}
+          triggerClosedHats={this.triggerClosedHats}
+          triggerOpenHats={this.triggerOpenHats}
+          triggerRide={this.triggerRide}
+        />
       </div>
     )
   }

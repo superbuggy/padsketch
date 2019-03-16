@@ -13,7 +13,7 @@ export default class GridContainer extends Component {
   }
 
   render() {
-    const instrumentRows = [1,2,3,4]// this.props.instruments
+    const instrumentRows = Object.keys(this.props.instruments)
     const cells = instrumentRows.map(instrument => {
       const steps = Array.from(Array(this.state.sequenceLength))
       const stepsPerInstrument = steps.map(step => (
@@ -26,6 +26,7 @@ export default class GridContainer extends Component {
       return (
         <div className="instrument-lane">
           { stepsPerInstrument }
+          { instrument }
         </div>
       )
     })
@@ -36,10 +37,11 @@ export default class GridContainer extends Component {
         <option 
           value={amountOfSteps} 
           key={i} 
-          selected={this.state.sequenceLength===amountOfSteps}>
+          selected={this.state.sequenceLength === amountOfSteps}>
           { amountOfSteps }
         </option>
       ))
+
     return (
       <div>
         { cells }
