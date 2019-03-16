@@ -17,7 +17,8 @@ export default class GridContainer extends Component {
     const cells = instrumentRows.map(instrument => {
       const steps = Array.from(Array(this.state.sequenceLength))
       const stepsPerInstrument = steps.map(step => (
-        <div 
+        <div
+          key={step}
           className="step"
         />
 
@@ -32,7 +33,10 @@ export default class GridContainer extends Component {
     const options = Array.from(Array(13))
       .map((_, i) => i + 4)
       .map((amountOfSteps, i) => (
-        <option value={amountOfSteps} key={i}>
+        <option 
+          value={amountOfSteps} 
+          key={i} 
+          selected={this.state.sequenceLength===amountOfSteps}>
           { amountOfSteps }
         </option>
       ))
