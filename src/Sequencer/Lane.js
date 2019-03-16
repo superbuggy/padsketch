@@ -7,6 +7,7 @@ export default function Lane ({steps, instrument, changePulses, pulses, activeSt
 
   return (
     <div className="instrument-lane">
+    <section>
       { 
         steps.map((isActive, index) => {return(
           <div
@@ -15,6 +16,8 @@ export default function Lane ({steps, instrument, changePulses, pulses, activeSt
           />
         )}) 
       }
+    </section>
+    <section>
       { 
         `${instrument}` 
       }
@@ -25,6 +28,7 @@ export default function Lane ({steps, instrument, changePulses, pulses, activeSt
         value={pulses}
         label={'pulses'}
       />
+    </section>
     </div>
   )
 }

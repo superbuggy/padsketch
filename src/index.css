@@ -27,3 +27,13 @@ div.active-step {
   appearance: none;
   border: none;
 }
+
+.sequencer {
+  padding: 5vmax;
+  border: 1px solid black;
+}
+
+.lanes {
+  padding: 2.5vmax;
+  background: rgb(255, 222, 179);
+}

@@ -121,7 +121,8 @@ export default class Sequencer extends Component {
   render() {
 
     return (
-      <div>
+      <div className={'sequencer'}>
+        <section className={'lanes'}>
         { 
           Object.keys(this.state.lanes).map( (instrument, index) => (
             <Lane 
@@ -134,6 +135,7 @@ export default class Sequencer extends Component {
             />
           )) 
         }
+        </section>
         <RangeSlider
           min={4} 
           max={32} 
