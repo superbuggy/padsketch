@@ -42,7 +42,7 @@ export default class Sequencer extends Component {
     })
   }
 
-  tick = () => time => {
+  tick = () => time => { 
     Object.keys(this.state.lanes).forEach(instrument => {
       if (this.state.lanes[instrument].sequence[this.state.activeStep]) {
         switch (instrument) {

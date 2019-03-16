@@ -5,6 +5,7 @@ import Sequencer from './Sequencer'
 export default class Sampler extends Component {
   state = {
       sampler: null,
+      isPlaying: false
   }
 
   instruments = {
@@ -14,10 +15,16 @@ export default class Sampler extends Component {
     hatsOpen: ['G3'],
     ride: ['G#3', 'A3' , 'A#3', 'B3']
   }
-
-  transport = Tone.Transport
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.isPlaying !== this.state.isPlaying) {
+      this.state.isPlaying 
+        ? this.startTransport()
+        : this.stopTransport()
+    }
+  } 
 
   componentDidMount () {
+
     const sampleMap = {
       'C3': '/samples/01kick.wav',
       'C#3': '/samples/02 kick2.wav',
@@ -42,7 +49,15 @@ export default class Sampler extends Component {
   }
 
   startTransport = () => {
-    this.transport.start()
+    this.props.transport.start()
+  }
+
+  stopTransport = () => {
+    this.props.transport.stop()
+  }
+
+  togglePlaying = () => {
+    this.setState( ({isPlaying}) => ({isPlaying: !isPlaying}))
   }
   
   triggerKick = (samples) => {
@@ -73,16 +88,17 @@ export default class Sampler extends Component {
   }
 
   render () {
+    const { isPlaying } = this.state
     return (
       <div>
-        <button onClick={this.startTransport}> Start </button>
+        <button onClick={this.togglePlaying}> {isPlaying ? 'Stop' : 'Start'} </button>
         <button onClick={this.triggerKick}> Kick </button>
         <button onClick={this.triggerSnare}> Snare </button>
         <button onClick={this.triggerClosedHats}> Open Hat </button>
         <button onClick={this.triggerOpenHats}> Closed Hat </button>
         <button onClick={this.triggerRide}> Ride </button>
         <Sequencer
-          transport={this.transport}
+          transport={this.props.transport}
           instruments={this.instruments}
           triggerKick={this.triggerKick}
           triggerSnare={this.triggerSnare}
