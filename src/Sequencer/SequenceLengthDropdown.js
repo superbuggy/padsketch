@@ -6,13 +6,12 @@ export default function SequenceLengthDropdown({ changeSteps, sequenceLength }) 
   return (
     <label>
       Length
-    <select onChange={changeSteps}>
+    <select onChange={changeSteps} defaultValue={sequenceLength}>
       {
         range.map((amountOfSteps, i) => (
           <option 
             value={amountOfSteps} 
             key={i} 
-            selected={sequenceLength === amountOfSteps}
           >
             { amountOfSteps }
           </option>
