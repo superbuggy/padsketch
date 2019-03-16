@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class GridContainer extends Component {
   state = {
-    sequenceLength: 20,
+    sequenceLength: 16,
   }
 
   changeSteps = event => {
@@ -13,16 +13,17 @@ export default class GridContainer extends Component {
   }
 
   render() {
-    // this.props.instruments
-    const cells = [1,2,3,4].map(instrument => {
+    const instrumentRows = [1,2,3,4]// this.props.instruments
+    const cells = instrumentRows.map(instrument => {
       const steps = Array.from(Array(this.state.sequenceLength))
       const stepsPerInstrument = steps.map(step => (
-        <span>
-          {'X'}
-        </span>
+        <div 
+          className="step"
+        />
+
       ))
       return (
-        <div>
+        <div className="instrument-lane">
           { stepsPerInstrument }
         </div>
       )
