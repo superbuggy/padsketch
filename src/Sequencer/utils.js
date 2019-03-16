@@ -11,18 +11,19 @@ E. Bjorklund.
 Jack Rutherford
 */
 
-export function generatePattern (pulses, steps) { // renamed from the original
-  steps = Math.round(steps)
+export function generatePattern (length, pulses) {
+  if ( pulses === 0 ) return Array.from({ length }).fill(false)
+  length = Math.round(length)
   pulses = Math.round(pulses)
 
-  if (pulses > steps || pulses === 0 || steps === 0) {
+  if (pulses > length || pulses === 0 || length === 0) {
     return []
   }
 
   let pattern = []
   let counts = []
   let remainders = []
-  let divisor = steps - pulses
+  let divisor = length - pulses
   remainders.push(pulses)
   let level = 0
 

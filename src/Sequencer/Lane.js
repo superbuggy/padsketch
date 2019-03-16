@@ -8,12 +8,12 @@ export default function Lane ({steps, instrument, changePulses, pulses, ...props
   return (
     <div className="instrument-lane">
       { 
-        steps.map((_, index) => (
+        steps.map((isActive, index) => {return(
           <div
             key={index}
-            className="step"
+            className={`step ${isActive && 'active-cell'}`}
           />
-        )) 
+        )}) 
       }
       { 
         `${instrument}` 

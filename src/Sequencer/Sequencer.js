@@ -9,24 +9,43 @@ export default class Sequencer extends Component {
     const DEFAULT_LENGTH = 16
     this.state = {
       sequenceLength: DEFAULT_LENGTH,
-      lanes: this.buildSequences(DEFAULT_LENGTH)
+      lanes: this.buildLanes(props.instruments, DEFAULT_LENGTH)
     }
   }
 
-  componentDidUpdate (prevProps, { sequenceLength }) {
+  componentDidUpdate (prevProps, { sequenceLength, lanes: oldLanes }) {
     if (sequenceLength !== this.state.sequenceLength) {
-      const lanes = this.buildSequences(this.state.sequenceLength)
-      this.setState(_ => ({ lanes }))
+      const lanes = this.buildLanes(this.state.sequenceLength, this.props.instruments)
+      this.setState( _ => ({ lanes }) )
     }
+    Object.keys(this.state.lanes).forEach(instrument => {
+      if (oldLanes[instrument].pulses !== this.state.lanes[instrument].pulses) {
+        this.setState(state => {
+          const pulses = state.lanes[instrument].pulses
+          const sequence = generatePattern(state.sequenceLength, pulses)
+          return {
+            lanes: {
+              ...state.lanes,
+              [instrument]: {
+                pulses,
+                sequence
+              },
+            }
+          }
+        })
+      }
+    })
   }
 
-  buildSequences = length => {
-    return Object.keys(this.props.instruments).reduce((instruments, instrument) => {
-      instruments[instrument] = {
-        sequence: Array.from({ length }).fill(false),
-        pulses: 0
+  buildLanes = (instruments, length, pulses = 0) => {
+    const sequence =  generatePattern(length, pulses)
+    console.log(pulses, length, sequence, 'buildLanes')
+    return Object.keys(instruments).reduce((nextInstruments, instrument) => {
+      nextInstruments[instrument] = {
+        sequence,
+        pulses
       }
-      return instruments
+      return nextInstruments
     }, {})
   }
 
