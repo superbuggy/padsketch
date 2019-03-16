@@ -6,6 +6,14 @@ export default class Sampler extends Component {
       sampler: null,
   }
 
+  instruments = {
+    kick: ['C3', 'C#3'],
+    snare: ['D3', 'D#3', 'E3', 'F3'],
+    hatsClosed: ['F#3'],
+    hatsOpen: ['G3'],
+    ride: ['G#3', 'A3' , 'A#3', 'B3']
+  }
+
   transport = Tone.Transport
 
   componentDidMount () {
