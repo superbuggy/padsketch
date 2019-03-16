@@ -20,3 +20,10 @@ div.active-step {
   margin: 0;
   padding: 0;
 }
+
+.start-button {
+  padding: none;
+  font-size: 256px;
+  appearance: none;
+  border: none;
+}
