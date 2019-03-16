@@ -1,18 +1,30 @@
 import React from 'react'
+import RangeSlider from './RangeSlider'
 
-export default function Lane ({steps, instrument, ...props}) {
+export default function Lane ({steps, instrument, changePulses, pulses, ...props}) {
 
-  const stepsPerInstrument = steps.map((_, index) => (
-    <div
-      key={index}
-      className="step"
-    />
-  ))
+  const handleChange = pulses => { changePulses(instrument, pulses) }
 
   return (
     <div className="instrument-lane">
-      { stepsPerInstrument }
-      { instrument }
+      { 
+        steps.map((_, index) => (
+          <div
+            key={index}
+            className="step"
+          />
+        )) 
+      }
+      { 
+        `${instrument}` 
+      }
+      <RangeSlider 
+        handleChange={handleChange}
+        min={0}
+        max={steps.length}
+        value={pulses}
+        label={'pulses'}
+      />
     </div>
   )
 }
