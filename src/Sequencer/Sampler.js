@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Tone from 'tone'
 
-import GridContainer from './GridContainer'
+import GridContainer from './Sequencer'
 export default class Sampler extends Component {
   state = {
       sampler: null,

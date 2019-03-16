@@ -1,11 +1,10 @@
 import React from 'react'
-import {generateSequence, rotate} from './utils'
 
 export default function Lane ({steps, instrument, ...props}) {
 
-  const stepsPerInstrument = steps.map(step => (
+  const stepsPerInstrument = steps.map((_, index) => (
     <div
-      key={step}
+      key={index}
       className="step"
     />
   ))
