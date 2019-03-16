@@ -50,9 +50,9 @@ export function generatePattern (pulses, steps) { // renamed from the original
           build(level - 2)
         }
       } else if (level === -1) {
-        pattern.push(0)
+        pattern.push(false)
       } else if (level === -2) {
-        pattern.push(1)
+        pattern.push(true)
       }
     }
   }
