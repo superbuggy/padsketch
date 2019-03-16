@@ -18,9 +18,9 @@ export default class Sequencer extends Component {
     this.props.transport.scheduleRepeat(this.tick(), '8n')
   }
 
-  componentDidUpdate (prevProps, { sequenceLength, lanes: oldLanes }) {
-    if (sequenceLength !== this.state.sequenceLength) {
-      const lanes = this.buildLanes(this.state.sequenceLength, this.props.instruments)
+  componentDidUpdate (prevProps, { sequenceLength: oldSequenceLength, lanes: oldLanes }) {
+    if (oldSequenceLength !== this.state.sequenceLength) {
+      const lanes = this.buildLanes(this.props.instruments, this.state.sequenceLength)
       this.setState( _ => ({ lanes }) )
     }
     Object.keys(this.state.lanes).forEach(instrument => {
