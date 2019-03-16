@@ -9,8 +9,13 @@ export default class Sequencer extends Component {
     const DEFAULT_LENGTH = 16
     this.state = {
       sequenceLength: DEFAULT_LENGTH,
-      lanes: this.buildLanes(props.instruments, DEFAULT_LENGTH)
+      lanes: this.buildLanes(props.instruments, DEFAULT_LENGTH),
+      activeStep: 0
     }
+  }
+
+  componentDidMount() {
+    this.props.transport.scheduleRepeat(this.tick(), '8n')
   }
 
   componentDidUpdate (prevProps, { sequenceLength, lanes: oldLanes }) {
@@ -37,15 +42,37 @@ export default class Sequencer extends Component {
     })
   }
 
+  tick = () => time => {
+    Object.keys(this.state.lanes).forEach(instrument => {
+      if (this.state.lanes[instrument].sequence[this.state.activeStep]) {
+        switch (instrument) {
+          case 'kick':
+            return this.props.triggerKick()
+          case 'snare':
+            return this.props.triggerSnare()
+          case 'hatsClosed':
+            return this.props.triggerClosedHats()
+          case 'hatsOpen':
+            return this.props.triggerOpenHats()
+          case 'ride':
+            return this.props.triggerRide()
+          default:
+            return
+        }
+      }
+    })
+    this.setState( ({ activeStep, sequenceLength }) =>({ activeStep: (activeStep + 1) % sequenceLength }) )
+  }
+
+  // Build a lane in the sampler for every instrument
   buildLanes = (instruments, length, pulses = 0) => {
     const sequence =  generatePattern(length, pulses)
-    console.log(pulses, length, sequence, 'buildLanes')
-    return Object.keys(instruments).reduce((nextInstruments, instrument) => {
-      nextInstruments[instrument] = {
+    return Object.keys(instruments).reduce((lanes, instrument) => {
+      lanes[instrument] = {
         sequence,
         pulses
       }
-      return nextInstruments
+      return lanes
     }, {})
   }
 
@@ -102,6 +129,7 @@ export default class Sequencer extends Component {
               key={index}
               steps={this.state.lanes[instrument].sequence}
               pulses={this.state.lanes[instrument].pulses}
+              activeStep={this.state.activeStep}
               changePulses={this.changePulses}
             />
           )) 

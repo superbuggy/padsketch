@@ -1,13 +1,19 @@
 .step {
   display: inline-block;
+  box-sizing: border-box;
   min-height: 30px;
   max-height: 30px;
   min-width: 30px;
   max-width: 30px;
   border: 1px solid black;
 }
+
 div.active-cell {
   background: red;
+}
+
+div.active-step {
+  border: 15px solid rgba(255, 238, 0, 0.63);
 }
 
 .instrument-lane {

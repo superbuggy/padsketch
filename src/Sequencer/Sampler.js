@@ -50,22 +50,22 @@ export default class Sampler extends Component {
     // this.state.sampler.triggerAttack('C#3')
   }
 
-  triggerSnare = (samples) => {
+  triggerSnare = () => {
     this.state.sampler.triggerAttack('D3')
     // this.state.sampler.triggerAttack('D#3')
     // this.state.sampler.triggerAttack('E3')
     // this.state.sampler.triggerAttack('F3')
   }
   
-  triggerClosedHats = (samples) => {
+  triggerClosedHats = () => {
     this.state.sampler.triggerAttack('F#3')
   }
   
-  triggerOpenHats = (samples) => {
+  triggerOpenHats = () => {
     this.state.sampler.triggerAttack('G3')
   }
 
-  triggerRide = (samples) => {
+  triggerRide = () => {
     this.state.sampler.triggerAttack('G#3')
     // this.state.sampler.triggerAttack('A3')
     // this.state.sampler.triggerAttack('A#3')
@@ -82,6 +82,7 @@ export default class Sampler extends Component {
         <button onClick={this.triggerOpenHats}> Closed Hat </button>
         <button onClick={this.triggerRide}> Ride </button>
         <Sequencer
+          transport={this.transport}
           instruments={this.instruments}
           triggerKick={this.triggerKick}
           triggerSnare={this.triggerSnare}
