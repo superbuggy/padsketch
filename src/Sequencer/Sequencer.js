@@ -18,18 +18,27 @@ export default class Sequencer extends Component {
     this.props.transport.scheduleRepeat(this.tick(), '8n')
   }
 
+  shouldComponentUpdate (prevProps, prevState) {
+    return Object
+      .keys(this.state.lanes)
+      .some(instrument => this.didLaneChange(instrument,prevState, this.state))
+  }
+
+  didLaneChange = (instrument, prevState, state) => {
+    return Boolean(
+      prevState.lanes[instrument].pulses !== state.lanes[instrument].pulses
+      || prevState.lanes[instrument].offset !== state.lanes[instrument].offset
+      || prevState.sequenceLength !== state.sequenceLength
+    )
+  }
+
   componentDidUpdate (prevProps, prevState) {
     Object.keys(this.state.lanes).forEach(instrument => {
-      if (
-        prevState.lanes[instrument].pulses !== this.state.lanes[instrument].pulses
-        || prevState.lanes[instrument].offset !== this.state.lanes[instrument].offset
-        || prevState.sequenceLength !== this.state.sequenceLength
-      ) {
-        this.setState(({ lanes, sequenceLength }) => {
-          const { pulses, offset } = lanes[instrument]
-          return this.updateLanes(lanes, instrument, sequenceLength, pulses, offset)
-        })
-      }
+      this.setState(({ lanes, sequenceLength }) => {
+        let { pulses, offset } = lanes[instrument]
+        pulses = pulses > sequenceLength ? sequenceLength : pulses
+        return this.updateLanes(lanes, instrument, sequenceLength, pulses, offset)
+      })
     })
   }
 
