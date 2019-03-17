@@ -9,12 +9,13 @@ export default function Lane ({steps, instrument, changePulses, pulses, activeSt
     <div className="instrument-lane">
     <section>
       { 
-        steps.map((isActive, index) => {return(
-          <div
-            key={index}
-            className={`step ${isActive && 'active-cell'} ${index === activeStep && 'active-step'}`}
-          />
-        )}) 
+        steps.map((isActive, index) => {
+          return (
+            <div
+              key={index}
+              className={`step ${isActive && 'active-cell'} ${index === activeStep && 'active-step'}`}
+            />
+          )}) 
       }
     </section>
     <section>

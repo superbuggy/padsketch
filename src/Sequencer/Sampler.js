@@ -15,33 +15,38 @@ export default class Sampler extends Component {
     hatsOpen: ['G3'],
     ride: ['G#3', 'A3' , 'A#3', 'B3']
   }
+
   componentDidUpdate (prevProps, prevState) {
-    if (prevState.isPlaying !== this.state.isPlaying) {
-      this.state.isPlaying 
+    prevState.isPlaying !== this.state.isPlaying 
+    && this.state.isPlaying 
         ? this.startTransport()
         : this.stopTransport()
-    }
-  } 
+    
+  }
+
+  sampleMap = {
+    'C3': '/samples/01kick.wav',
+    'C#3': '/samples/02 kick2.wav',
+    'D3' : '/samples/04 snare1.wav',
+    'D#3' : '/samples/05 snare2.wav',
+    'E3' : '/samples/06 snare3.wav',
+    'F3' : '/samples/07 snare4.wav',
+    'F#3' : '/samples/08 hihatclosed.wav',
+    'G3' : '/samples/09 hihatwayopen.wav',
+    'G#3' : '/samples/10 rideping1.wav',
+    'A3' : '/samples/11 rideping2.wav',
+    'A#3' : '/samples/12 rideping3.wav',
+    'B3' : '/samples/13 rideping4.wav',
+  }
 
   componentDidMount () {
-
-    const sampleMap = {
-      'C3': '/samples/01kick.wav',
-      'C#3': '/samples/02 kick2.wav',
-      'D3' : '/samples/04 snare1.wav',
-      'D#3' : '/samples/05 snare2.wav',
-      'E3' : '/samples/06 snare3.wav',
-      'F3' : '/samples/07 snare4.wav',
-      'F#3' : '/samples/08 hihatclosed.wav',
-      'G3' : '/samples/09 hihatwayopen.wav',
-      'G#3' : '/samples/10 rideping1.wav',
-      'A3' : '/samples/11 rideping2.wav',
-      'A#3' : '/samples/12 rideping3.wav',
-      'B3' : '/samples/13 rideping4.wav',
-    }
-
+    window.addEventListener('keydown', event => {
+      if (event.key === ' ') {
+        this.togglePlaying()
+      }
+    })
     const sampler = new Tone.Sampler(
-      sampleMap,
+      this.sampleMap,
       this.triggerSample
     ).sync()
     sampler.toMaster()
@@ -53,6 +58,7 @@ export default class Sampler extends Component {
   }
 
   stopTransport = () => {
+    // this.props.transport.cancel()
     this.props.transport.stop()
   }
 

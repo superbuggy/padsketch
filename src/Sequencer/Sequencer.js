@@ -10,7 +10,7 @@ export default class Sequencer extends Component {
     this.state = {
       sequenceLength: DEFAULT_LENGTH,
       lanes: this.buildLanes(props.instruments, DEFAULT_LENGTH),
-      activeStep: 0
+      activeStep: NaN
     }
   }
 
@@ -42,9 +42,11 @@ export default class Sequencer extends Component {
     })
   }
 
-  tick = () => time => { 
+  tick = () => time => {
+    const activeStep = (this.state.activeStep + 1) % this.state.sequenceLength || 0
     Object.keys(this.state.lanes).forEach(instrument => {
-      if (this.state.lanes[instrument].sequence[this.state.activeStep]) {
+      if (this.state.lanes[instrument].sequence[activeStep]) {
+        console.log(instrument)
         switch (instrument) {
           case 'kick':
             return this.props.triggerKick()
@@ -61,7 +63,7 @@ export default class Sequencer extends Component {
         }
       }
     })
-    this.setState( ({ activeStep, sequenceLength }) =>({ activeStep: (activeStep + 1) % sequenceLength }) )
+    this.setState( ( _ => ({ activeStep }) ) )
   }
 
   // Build a lane in the sampler for every instrument
