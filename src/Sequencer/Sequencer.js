@@ -9,7 +9,7 @@ export default class Sequencer extends Component {
     const DEFAULT_LENGTH = 16
     this.state = {
       sequenceLength: DEFAULT_LENGTH,
-      lanes: this.buildLanes(props.instruments, DEFAULT_LENGTH),
+      lanes: this.initializedLanes(props.instruments, DEFAULT_LENGTH),
       activeStep: NaN
     }
   }
@@ -66,8 +66,8 @@ export default class Sequencer extends Component {
     }
   }
 
-  buildLaneState = (instrument, sequenceLength, pulses, offset) => {
-    const sequence = generatePattern(sequenceLength, pulses)
+  buildLaneState = (instrument, length, pulses, offset) => {
+    const sequence = generatePattern(length, pulses)
     const offsetSequence = rotate(sequence.slice(), offset)
     return {
       [instrument]: {
@@ -80,11 +80,25 @@ export default class Sequencer extends Component {
   }
   
   // Build lanes in the sampler for each instrument
-  buildLanes = (instruments, length, pulses = 0, offset = 0) => {
+  buildLanes = (instruments, length, pulses, offset, lanes = {}) => {
     return Object.keys(instruments).reduce((lanes, instrument) => {
       const lane = this.buildLaneState(instrument, length, pulses, offset)
       return {...lanes, ...lane}
-    }, {})
+    }, lanes)
+  }
+
+  updateLanes = (lanes, instrument, sequenceLength, pulses, offset) => {
+    const lane = this.buildLaneState(instrument, sequenceLength, pulses, offset)
+    return {
+      lanes: {
+        ...lanes,
+        ...lane
+      }
+    }
+  }
+
+  initializedLanes = (instruments, length) => {
+    return this.buildLanes(instruments, length, 0, 0, {})
   }
 
   changeSequenceLength = sequenceLength => {
@@ -92,60 +106,26 @@ export default class Sequencer extends Component {
   }
 
   changePulses = (instrument, pulses) => {
-    this.setState( ({ lanes }) => (
-      {
-        lanes: {
-          ...lanes,
-          [instrument]: {
-            ...lanes[instrument],
-            pulses
-          }
-        }
-      }
-    ))
-  }
-
-  changeOffset = (instrument, offset) => {
-    this.setState( ({ lanes }) => (
-      {
-        lanes: {
-          ...lanes,
-          [instrument]: {
-            ...lanes[instrument],
-            offsetSequence: rotate(lanes[instrument].sequence, offset),
-            offset
-          }
-        }
-      }
-    ))
-  }
-
-  changeSequence = (instrument, pulses) => {
-    this.setState( ({ sequenceLength, lanes }) => {
+    this.setState( ({ lanes, sequenceLength }) => {
       const { offset } = lanes[instrument]
-      const sequence = rotate(generatePattern(pulses, sequenceLength), offset)
-      return {
-        lanes: {
-          [instrument]: {
-            sequence,
-            ...lanes[instrument]
-          },
-          ...lanes
-        }
-      }
+      return this.updateLanes(lanes, instrument, sequenceLength, pulses, offset)
     })
   }
-
+  
+  changeOffset = (instrument, offset) => {
+    this.setState( ({ lanes, sequenceLength }) => {
+      const { pulses } = lanes[instrument]
+      return this.updateLanes(lanes, instrument, sequenceLength, pulses, offset)
+    })
+  }
+  
   toggleStep = (instrument, step) => {
-    this.setState( ({ lanes }) => ({
-      lanes: {
-        ...lanes,
-        [instrument]: {
-          ...lanes[instrument], //pulses  
-          sequence: [step] = !lanes[instrument].sequence[step]
-        }
-      }
-    }) )
+    this.setState( ({ lanes }) => {
+      const { sequenceLength, pulses, offset } = lanes[instrument]
+      const newLanes = this.updateLanes(lanes, instrument, sequenceLength, pulses, offset)
+      newLanes[instrument].sequence[step] = !newLanes[instrument].sequence[step]
+      return newLanes
+    } )
   }
 
   render() {
