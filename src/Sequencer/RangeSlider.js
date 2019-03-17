@@ -8,7 +8,6 @@ export default function RangeSlider({ min, max, handleChange, value, label }) {
   }
 
   return (
-    <div>
     <label>
       {label}
       <input 
@@ -21,7 +20,6 @@ export default function RangeSlider({ min, max, handleChange, value, label }) {
         />
       {value}
     </label>
-    </div>
   )
 
 }

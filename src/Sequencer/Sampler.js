@@ -9,11 +9,11 @@ export default class Sampler extends Component {
   }
 
   instruments = {
-    kick: ['C3', 'C#3'],
-    snare: ['D3', 'D#3', 'E3', 'F3'],
-    hatsClosed: ['F#3'],
-    hatsOpen: ['G3'],
-    ride: ['G#3', 'A3' , 'A#3', 'B3']
+    'Kick': ['C3', 'C#3'],
+    'Snare': ['D3', 'D#3', 'E3', 'F3'],
+    'Closed Hats': ['F#3'],
+    'Open Hats': ['G3'],
+    'Ride': ['G#3', 'A3' , 'A#3', 'B3']
   }
 
   componentDidUpdate (prevProps, prevState) {

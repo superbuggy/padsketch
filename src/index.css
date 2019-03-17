@@ -37,3 +37,10 @@ div.active-step {
   padding: 2.5vmax;
   background: rgb(255, 222, 179);
 }
+
+section>p {
+  display: inline-block;
+  min-width: 5em;
+  max-width: 5em;
+  margin-right: 1em;
+}

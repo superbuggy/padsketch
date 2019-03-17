@@ -19,9 +19,7 @@ export default function Lane ({steps, instrument, changePulses, pulses, activeSt
       }
     </section>
     <section>
-      { 
-        `${instrument}` 
-      }
+      <p>{instrument}</p>
       <RangeSlider 
         handleChange={handleChange}
         min={0}

@@ -46,17 +46,16 @@ export default class Sequencer extends Component {
     const activeStep = (this.state.activeStep + 1) % this.state.sequenceLength || 0
     Object.keys(this.state.lanes).forEach(instrument => {
       if (this.state.lanes[instrument].sequence[activeStep]) {
-        console.log(instrument)
         switch (instrument) {
-          case 'kick':
+          case 'Kick':
             return this.props.triggerKick()
-          case 'snare':
+          case 'Snare':
             return this.props.triggerSnare()
-          case 'hatsClosed':
+          case 'Closed Hats':
             return this.props.triggerClosedHats()
-          case 'hatsOpen':
+          case 'Open Hats':
             return this.props.triggerOpenHats()
-          case 'ride':
+          case 'Ride':
             return this.props.triggerRide()
           default:
             return
