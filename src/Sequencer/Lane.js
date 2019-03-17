@@ -1,15 +1,24 @@
 import React from 'react'
 import RangeSlider from './RangeSlider'
 
-export default function Lane ({steps, instrument, changePulses, pulses, activeStep, ...props}) {
+export default function Lane ({
+  sequence,
+  instrument,
+  changePulses,
+  changeOffset,
+  pulses,
+  offset,
+  activeStep,
+  ...props}) {
 
-  const handleChange = pulses => { changePulses(instrument, pulses) }
+  const handlePulsesChange = pulses => { changePulses(instrument, pulses) }
+  const handleOffsetChange = offset => { changeOffset(instrument, offset) }
 
   return (
     <div className="instrument-lane">
     <section>
       { 
-        steps.map((isActive, index) => {
+        sequence.map((isActive, index) => {
           return (
             <div
               key={index}
@@ -21,11 +30,18 @@ export default function Lane ({steps, instrument, changePulses, pulses, activeSt
     <section>
       <p>{instrument}</p>
       <RangeSlider 
-        handleChange={handleChange}
+        handleChange={handlePulsesChange}
         min={0}
-        max={steps.length}
+        max={sequence.length}
         value={pulses}
-        label={'pulses'}
+        label={'Pulses'}
+      />
+      <RangeSlider 
+        handleChange={handleOffsetChange}
+        min={0}
+        max={sequence.length}
+        value={offset}
+        label={'Offset'}
       />
     </section>
     </div>

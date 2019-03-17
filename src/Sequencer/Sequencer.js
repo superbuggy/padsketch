@@ -25,16 +25,13 @@ export default class Sequencer extends Component {
     }
     Object.keys(this.state.lanes).forEach(instrument => {
       if (oldLanes[instrument].pulses !== this.state.lanes[instrument].pulses) {
-        this.setState(state => {
-          const pulses = state.lanes[instrument].pulses
-          const sequence = generatePattern(state.sequenceLength, pulses)
+        this.setState(({ lanes, sequenceLength }) => {
+          const { pulses, offset } = lanes[instrument]
+          const lane = this.buildLaneState(instrument, sequenceLength, pulses, offset)
           return {
-            lanes: {
-              ...state.lanes,
-              [instrument]: {
-                pulses,
-                sequence
-              },
+            lanes : {
+              ...lanes,
+              ...lane
             }
           }
         })
@@ -46,34 +43,47 @@ export default class Sequencer extends Component {
     const activeStep = (this.state.activeStep + 1) % this.state.sequenceLength || 0
     Object.keys(this.state.lanes).forEach(instrument => {
       if (this.state.lanes[instrument].sequence[activeStep]) {
-        switch (instrument) {
-          case 'Kick':
-            return this.props.triggerKick()
-          case 'Snare':
-            return this.props.triggerSnare()
-          case 'Closed Hats':
-            return this.props.triggerClosedHats()
-          case 'Open Hats':
-            return this.props.triggerOpenHats()
-          case 'Ride':
-            return this.props.triggerRide()
-          default:
-            return
-        }
+        this.playSample(instrument)
       }
     })
     this.setState( ( _ => ({ activeStep }) ) )
   }
 
-  // Build a lane in the sampler for every instrument
-  buildLanes = (instruments, length, pulses = 0) => {
-    const sequence =  generatePattern(length, pulses)
-    return Object.keys(instruments).reduce((lanes, instrument) => {
-      lanes[instrument] = {
+  playSample = instrument => {
+    switch (instrument) {
+      case 'Kick':
+        return this.props.triggerKick()
+      case 'Snare':
+        return this.props.triggerSnare()
+      case 'Closed Hats':
+        return this.props.triggerClosedHats()
+      case 'Open Hats':
+        return this.props.triggerOpenHats()
+      case 'Ride':
+        return this.props.triggerRide()
+      default:
+        return
+    }
+  }
+
+  buildLaneState = (instrument, sequenceLength, pulses, offset) => {
+    const sequence = generatePattern(sequenceLength, pulses)
+    const offsetSequence = rotate(sequence.slice(), offset)
+    return {
+      [instrument]: {
+        pulses,
         sequence,
-        pulses
+        offset,
+        offsetSequence
       }
-      return lanes
+    }
+  }
+  
+  // Build lanes in the sampler for each instrument
+  buildLanes = (instruments, length, pulses = 0, offset = 0) => {
+    return Object.keys(instruments).reduce((lanes, instrument) => {
+      const lane = this.buildLaneState(instrument, length, pulses, offset)
+      return {...lanes, ...lane}
     }, {})
   }
 
@@ -95,16 +105,35 @@ export default class Sequencer extends Component {
     ))
   }
 
-  changeSequence = (instrument, pulses) => {
-    this.setState( ({ sequenceLength, lanes }) =>({
-      lanes: {
-        [instrument]: {
-          sequence: generatePattern(pulses, sequenceLength),
-          ...lanes[instrument]
-        },
-        ...lanes
+  changeOffset = (instrument, offset) => {
+    this.setState( ({ lanes }) => (
+      {
+        lanes: {
+          ...lanes,
+          [instrument]: {
+            ...lanes[instrument],
+            offsetSequence: rotate(lanes[instrument].sequence, offset),
+            offset
+          }
+        }
       }
-    }))
+    ))
+  }
+
+  changeSequence = (instrument, pulses) => {
+    this.setState( ({ sequenceLength, lanes }) => {
+      const { offset } = lanes[instrument]
+      const sequence = rotate(generatePattern(pulses, sequenceLength), offset)
+      return {
+        lanes: {
+          [instrument]: {
+            sequence,
+            ...lanes[instrument]
+          },
+          ...lanes
+        }
+      }
+    })
   }
 
   toggleStep = (instrument, step) => {
@@ -129,10 +158,12 @@ export default class Sequencer extends Component {
             <Lane 
               instrument={instrument}
               key={index}
-              steps={this.state.lanes[instrument].sequence}
+              sequence={this.state.lanes[instrument].offsetSequence}
               pulses={this.state.lanes[instrument].pulses}
+              offset={this.state.lanes[instrument].offset}
               activeStep={this.state.activeStep}
               changePulses={this.changePulses}
+              changeOffset={this.changeOffset}
             />
           )) 
         }

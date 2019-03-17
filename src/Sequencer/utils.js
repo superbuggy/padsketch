@@ -68,7 +68,7 @@ export function rotate (array, times) {
   let rotatedArray = array.slice()
   let count = 0
   while (count < times) {
-    rotatedArray.push(rotatedArray.shift()) //rotate left
+    rotatedArray.unshift(rotatedArray.pop()) //rotate right
     count += 1
   }
   return rotatedArray
