@@ -18,22 +18,16 @@ export default class Sequencer extends Component {
     this.props.transport.scheduleRepeat(this.tick(), '8n')
   }
 
-  componentDidUpdate (prevProps, { sequenceLength: oldSequenceLength, lanes: oldLanes }) {
-    if (oldSequenceLength !== this.state.sequenceLength) {
-      const lanes = this.buildLanes(this.props.instruments, this.state.sequenceLength)
-      this.setState( _ => ({ lanes }) )
-    }
+  componentDidUpdate (prevProps, prevState) {
     Object.keys(this.state.lanes).forEach(instrument => {
-      if (oldLanes[instrument].pulses !== this.state.lanes[instrument].pulses) {
+      if (
+        prevState.lanes[instrument].pulses !== this.state.lanes[instrument].pulses
+        || prevState.lanes[instrument].offset !== this.state.lanes[instrument].offset
+        || prevState.sequenceLength !== this.state.sequenceLength
+      ) {
         this.setState(({ lanes, sequenceLength }) => {
           const { pulses, offset } = lanes[instrument]
-          const lane = this.buildLaneState(instrument, sequenceLength, pulses, offset)
-          return {
-            lanes : {
-              ...lanes,
-              ...lane
-            }
-          }
+          return this.updateLanes(lanes, instrument, sequenceLength, pulses, offset)
         })
       }
     })
@@ -65,6 +59,14 @@ export default class Sequencer extends Component {
         return
     }
   }
+  
+  // Build lanes in the sampler for each instrument
+  buildLanes = (instruments, length, pulses, offset, lanes = {}) => {
+    return Object.keys(instruments).reduce((lanes, instrument) => {
+      const lane = this.buildLaneState(instrument, length, pulses, offset)
+      return {...lanes, ...lane}
+    }, lanes)
+  }
 
   buildLaneState = (instrument, length, pulses, offset) => {
     const sequence = generatePattern(length, pulses)
@@ -78,13 +80,9 @@ export default class Sequencer extends Component {
       }
     }
   }
-  
-  // Build lanes in the sampler for each instrument
-  buildLanes = (instruments, length, pulses, offset, lanes = {}) => {
-    return Object.keys(instruments).reduce((lanes, instrument) => {
-      const lane = this.buildLaneState(instrument, length, pulses, offset)
-      return {...lanes, ...lane}
-    }, lanes)
+
+  initializedLanes = (instruments, length) => {
+    return this.buildLanes(instruments, length, 0, 0, {})
   }
 
   updateLanes = (lanes, instrument, sequenceLength, pulses, offset) => {
@@ -97,9 +95,6 @@ export default class Sequencer extends Component {
     }
   }
 
-  initializedLanes = (instruments, length) => {
-    return this.buildLanes(instruments, length, 0, 0, {})
-  }
 
   changeSequenceLength = sequenceLength => {
     this.setState( _ => ({ sequenceLength }) )
