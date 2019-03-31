@@ -1,4 +1,5 @@
 import React from 'react'
+import './RangeSlider.css'
 
 export default function RangeSlider({ min, max, handleChange, value, label }) {
 

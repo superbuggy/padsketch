@@ -96,7 +96,7 @@ export default class Sampler extends Component {
   render () {
     const { isPlaying } = this.state
     return (
-      <div>
+      <div className='sampler'>
         <button onClick={this.togglePlaying}> {isPlaying ? 'Stop' : 'Start'} </button>
         <button onClick={this.triggerKick}> Kick </button>
         <button onClick={this.triggerSnare}> Snare </button>
