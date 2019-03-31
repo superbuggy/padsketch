@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import Sampler from './Sequencer/Sampler'
 import Tone from 'tone'
-export default class App extends Component {
+import './Padsketch.css'
+
+export default class Padsketch extends Component {
   state = {
     userHasInteracted: false
   }
