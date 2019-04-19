@@ -82,8 +82,17 @@ export default class Sequencer extends Component {
   }
 
   changeSequenceLength = sequenceLength => {
-    console.log(sequenceLength)
-    this.setState( _ => ({ sequenceLength }) )
+    this.setState( ({ lanes }) => ({
+        sequenceLength,
+        lanes: Object.keys(lanes).reduce((newLanes, instrument) => {
+          const { pulses, offset } = lanes[instrument]
+          return {
+            ...newLanes,
+            ...this.buildLaneState(instrument, sequenceLength, pulses, offset)
+          }
+        }, {})
+      })
+    )
   }
 
   changePulses = (instrument, pulses) => {
