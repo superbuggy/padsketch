@@ -97,11 +97,6 @@ export default class Sampler extends Component {
     return (
       <div className='sampler'>
         <button onClick={this.togglePlaying}> {isPlaying ? 'Stop' : 'Start'} </button>
-        <button onClick={this.triggerKick}> Kick </button>
-        <button onClick={this.triggerSnare}> Snare </button>
-        <button onClick={this.triggerClosedHats}> Open Hat </button>
-        <button onClick={this.triggerOpenHats}> Closed Hat </button>
-        <button onClick={this.triggerRide}> Ride </button>
         <Sequencer
           transport={this.props.transport}
           instruments={this.instruments}
