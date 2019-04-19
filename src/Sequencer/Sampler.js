@@ -47,7 +47,7 @@ export default class Sampler extends Component {
     })
     const sampler = new Tone.Sampler(
       this.sampleMap,
-      this.triggerSample
+      () => console.log('sampler loaded callback')
     ).sync()
     sampler.toMaster()
     this.setState( _ => ({ sampler }) )
@@ -58,7 +58,6 @@ export default class Sampler extends Component {
   }
 
   stopTransport = () => {
-    // this.props.transport.cancel()
     this.props.transport.stop()
   }
 
