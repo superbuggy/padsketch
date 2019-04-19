@@ -10,11 +10,11 @@ export default class Padsketch extends Component {
 
   christen = () => {
     Tone.context.resume();
-    this.setState( ({userHasInteracted}) => ({userHasInteracted: !userHasInteracted}))
+    this.setState( ({ userHasInteracted }) => ({ userHasInteracted: !userHasInteracted }) )
   }
 
   componentDidMount () {
-    Tone.transport.loop = true
+    Tone.Transport.loop = true
   }
 
   render() {
@@ -22,8 +22,8 @@ export default class Padsketch extends Component {
       <div>
         {
           this.state.userHasInteracted 
-          ? <Sampler transport={Tone.Transport} /> 
-          : <button className={'start-button'} onClick={this.christen}>▸</button>
+            ? <Sampler transport={Tone.Transport} /> 
+            : <button className={'start-button'} onClick={this.christen}>▸</button>
         }
       </div>
     )
