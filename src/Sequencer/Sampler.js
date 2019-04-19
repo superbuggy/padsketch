@@ -99,6 +99,7 @@ export default class Sampler extends Component {
         <button onClick={this.togglePlaying}> {isPlaying ? 'Stop' : 'Start'} </button>
         <Sequencer
           transport={this.props.transport}
+          isPlaying={this.state.isPlaying}
           instruments={this.instruments}
           triggerKick={this.triggerKick}
           triggerSnare={this.triggerSnare}

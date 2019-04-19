@@ -59,9 +59,11 @@ export default class Sequencer extends Component {
   tick = () => time => {
     const activeStep = (this.state.activeStep + 1) % this.state.sequenceLength || 0
     Object.keys(this.state.lanes).forEach(instrument => {
-      this.state.lanes[instrument].offsetSequence[activeStep] && this.playSample(instrument)
+      if (this.state.lanes[instrument].offsetSequence[activeStep] && this.props.isPlaying) {
+        this.playSample(instrument)
+      }
     })
-    this.setState( ( _ => ({ activeStep }) ) )
+    this.setState( _ => ({ activeStep }) )
   }
 
   playSample = instrument => {
