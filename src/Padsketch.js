@@ -12,6 +12,11 @@ export default class Padsketch extends Component {
     Tone.context.resume();
     this.setState( ({userHasInteracted}) => ({userHasInteracted: !userHasInteracted}))
   }
+
+  componentDidMount () {
+    Tone.transport.loop = true
+  }
+
   render() {
     return (
       <div>
