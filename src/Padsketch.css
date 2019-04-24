@@ -10,7 +10,7 @@
   -moz-osx-font-smoothing: grayscale;
   background: rgb(36, 39, 46);
   color: rgba(195, 0, 255, 0.6);
-  /* text-shadow: 1px 1px 0px rgba(255, 255, 0, 0.623); */
+  text-shadow: -1px 1px 0px rgb(62, 0, 90);
 }
 
 .step {
@@ -22,7 +22,7 @@
   max-width: 1.5em;
   border: 2px solid rgba(119, 0, 255, .5);
   border-radius: 25%; 
-  margin: 0 .1em;
+  margin-right: 0.1em;
   background-image: radial-gradient(
     rgba(119, 0, 255, .1),
     rgba(119, 0, 255, .4),
@@ -53,15 +53,24 @@ input {
 }
 
 .instrument-lane {
-  border-radius: .25em;
-  margin-top: .4em;
-  padding: .4em;
+  padding: 0.4em 0.4em;
   background: rgb(66, 54, 73);
   border-right: 4px solid rgb(40, 32, 51);
-  border-bottom: 4px solid rgb(36, 25, 51);
-  border-top: 2px solid rgb(36, 39, 46);
   border-left: 2px solid rgb(36, 39, 46);
 }
+
+.instrument-lane:first-child {
+  border-top-left-radius: 0.25em;
+  border-top-right-radius: 0.25em;
+  border-top: 2px solid rgb(36, 39, 46);
+}
+
+.instrument-lane:last-child {
+  border-bottom-left-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+  border-bottom: 4px solid rgb(36, 25, 51);
+}
+
 
 .slider {
   margin: 0 1em;
@@ -79,7 +88,7 @@ input {
 
 .sequencer {
   padding: 5vmax;
-  border: 1px solid black;
+  border: 1px solid white;
 }
 
 .lanes {
