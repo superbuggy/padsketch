@@ -11,7 +11,8 @@ export default function RangeSlider({ min, max, handleChange, value, label }) {
   return (
     <label>
       {label}
-      <input 
+      <input
+        className="controls"
         type="range"
         min={min}
         max={max}

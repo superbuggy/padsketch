@@ -27,7 +27,7 @@ export default function Lane ({
           )}) 
       }
     </section>
-    <section>
+    <section className="controls">
       <p>{instrument}</p>
       <RangeSlider 
         handleChange={handlePulsesChange}

@@ -17,11 +17,9 @@ export default class Sampler extends Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    prevState.isPlaying !== this.state.isPlaying 
-    && this.state.isPlaying 
+    prevState.isPlaying !== this.state.isPlaying && this.state.isPlaying 
         ? this.startTransport()
         : this.stopTransport()
-    
   }
 
   sampleMap = {
@@ -65,11 +63,11 @@ export default class Sampler extends Component {
     this.setState( ({isPlaying}) => ({isPlaying: !isPlaying}))
   }
   
-  triggerKick = (samples) => {
+  triggerKick = () => {
     this.state.sampler.get('C3').start()
     // this.state.sampler.get('C#3').start()
   }
-
+  
   triggerSnare = () => {
     this.state.sampler.get('D3').start()
     // this.state.sampler.get('D#3').start()
@@ -78,7 +76,8 @@ export default class Sampler extends Component {
   }
   
   triggerClosedHats = () => {
-    this.state.sampler.get('F#3').start()
+      this.state.sampler.get('F#3').start()
+      this.state.sampler.get('G3').stop()
   }
   
   triggerOpenHats = () => {
