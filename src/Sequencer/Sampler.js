@@ -45,10 +45,10 @@ export default class Sampler extends Component {
         this.togglePlaying()
       }
     })
-    const sampler = new Tone.Sampler(
+    const sampler = new Tone.Players(
       this.sampleMap,
-      () => console.log('sampler loaded callback')
-    ).sync()
+      () => console.log(sampler)
+    )//.sync()
     sampler.toMaster()
     this.setState( _ => ({ sampler }) )
   }
@@ -66,30 +66,30 @@ export default class Sampler extends Component {
   }
   
   triggerKick = (samples) => {
-    this.state.sampler.triggerAttack('C3')
-    // this.state.sampler.triggerAttack('C#3')
+    this.state.sampler.get('C3').start()
+    // this.state.sampler.get('C#3').start()
   }
 
   triggerSnare = () => {
-    this.state.sampler.triggerAttack('D3')
-    // this.state.sampler.triggerAttack('D#3')
-    // this.state.sampler.triggerAttack('E3')
-    // this.state.sampler.triggerAttack('F3')
+    this.state.sampler.get('D3').start()
+    // this.state.sampler.get('D#3').start()
+    // this.state.sampler.get('E3').start()
+    // this.state.sampler.get('F3').start()
   }
   
   triggerClosedHats = () => {
-    this.state.sampler.triggerAttack('F#3')
+    this.state.sampler.get('F#3').start()
   }
   
   triggerOpenHats = () => {
-    this.state.sampler.triggerAttack('G3')
+    this.state.sampler.get('G3').start()
   }
 
   triggerRide = () => {
-    this.state.sampler.triggerAttack('G#3')
-    // this.state.sampler.triggerAttack('A3')
-    // this.state.sampler.triggerAttack('A#3')
-    // this.state.sampler.triggerAttack('B3')
+    this.state.sampler.get('G#3').start()
+    // this.state.sampler.get('A3').start()
+    // this.state.sampler.get('A#3').start()
+    // this.state.sampler.get('B3').start()
   }
 
   render () {
