@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
 import './EuclideanTones.css'
 import TonesContainer from './TonesContainer'
-import Tone from 'tone'
 
 class EuclideanTones extends Component {
-  render () {
+
+  state= {
+    polySynth: null
+  }
+  componentDidMount () {
+    this.initializeSynth()
+  }
+  
+  initializeSynth = () => {
+    const { Tone } = this.props 
     const polySynth = new Tone.PolySynth(12, Tone.Synth).toMaster()
+    this.setState({ polySynth })
+  }
+  render () {
     return (
-      <TonesContainer polySynth={polySynth} />
+      <TonesContainer polySynth={this.state.polySynth} />
     )
   }
 }
