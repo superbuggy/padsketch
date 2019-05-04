@@ -1,3 +1,33 @@
-.App {
-  text-align: center;
+:root {
+  --activeTonesAndInfoColor: #F5FFAF;
+  --activeTonesBGColor: #bad262d0;
 }
+
+.slice {
+  fill: transparent;
+  stroke-width: .001;
+  stroke: #bad262;
+}
+.active.slice {
+  fill: var(--activeTonesBGColor);
+}
+
+.inner-circle {
+  fill: #086800;
+}
+
+text{
+  font-family: 'Germania One', cursive;
+}
+
+.slice-text {
+  fill: var(--activeTonesAndInfoColor);
+  font-size: .15px;
+  /* fontSize: '0.12px'; */
+  /* stroke: props.active ? #00000033 : transparent; */
+  stroke-linecap: round;
+  stroke-width: 0.01;
+  /* paintOrder: props.active ? stroke : fill; */
+  text-anchor: middle;
+}
+

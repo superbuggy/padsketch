@@ -1,7 +1,7 @@
 import React from 'react'
 import ToneSlice from './ToneSlice'
-import { pitchSets, CIRCLE_OF_FIFTHS } from './constants'
-import { activeTonesAndInfoColor } from './styleConstants'
+import { pitchSets } from './constants'
+
 
 export const ToneCircle = ({
   activeTones,
@@ -38,30 +38,25 @@ export const ToneCircle = ({
       width={SVG_SIZE}
     >
       {toneSlices}
-      <circle
+      <circle className={'inner-circle'}
         cx={0}
         cy={0}
         r={0.6}
-        fill={'#086800'}
       />
-      <text
+      <text className={'slice-text'}
         x={0}
         y={0}
         textAnchor={'middle'}
-        fill={activeTonesAndInfoColor}
         strokeLinecap={'round'}
         strokeWidth={0.001}
         stroke={'#829345d0'}
         paintOrder={'stroke'}
-        style={{
-          fontSize: '0.12px'
-        }}>
+      >
         {pitchSets[activeCount] ? `${pitchSets[activeCount]}` : ''}
       </text>
-      <polygon
+      <polygon className={'slice-text'}
         onClick={playing ? stop : play}
         points={playing ? '-0.08, 0.20, -0.08, 0.36, 0.08, 0.36, 0.08, 0.20' : '-0.05, 0.2  -0.05, 0.4  0.10, 0.3'}
-        fill={activeTonesAndInfoColor}
       />
     </svg>
   )
