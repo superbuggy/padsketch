@@ -21,6 +21,20 @@ export default class TonesContainer extends Component {
     this.transport = Tone.Transport
   }
 
+  changeOffset = offset => {
+    this.setState(
+      _ => ({ offset }),
+      this.filterTones
+    )
+  }
+
+  changeActiveCount = activeCount => {
+    this.setState(
+      _ => ({ activeCount }),
+      this.filterTones
+    )
+  }
+
   play = () => {
     this.setState(
       prevState => {
@@ -60,19 +74,10 @@ export default class TonesContainer extends Component {
     )
   }
 
-  handleChange = event => {
-    event.persist()
-    this.setState(
-      _ => ({ [event.target.name]: parseInt(event.target.value, 10) }),
-      this.filterTones
-    )
-  }
-
   render () {
 
     return (
       <div>
-        <h1>Euclidean Tones</h1>
         <ToneCircle
           tones={this.state.tones}
           activeTones={this.state.activeTones}
@@ -84,7 +89,8 @@ export default class TonesContainer extends Component {
         <Controls
           offset={this.state.offset}
           activeCount={this.state.activeCount}
-          handleChange={this.handleChange}
+          changeOffset={this.changeOffset}
+          changeActiveCount={this.changeActiveCount}
           maxTones={this.state.tones.length}
         />
       </div>
