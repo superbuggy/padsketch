@@ -3,8 +3,6 @@
 .sampler {
   font-family: 'Germania One', cursive;
   letter-spacing: .05em;
-  /* font-family: 'ZCOOL XiaoWei', serif; */
-  /* font-family: 'Cuprum', sans-serif; */
   font-size: 24px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -41,7 +39,6 @@ div.active-cell {
 }
 
 div.active-step {
-  /* border: 15px solid rgba(255, 238, 0, 0.63); */
   transition: background-image 1s;
   transition: border 1s;
   background-color: rgba(119, 0, 255, .5);
@@ -64,22 +61,7 @@ section.controls {
 .instrument-lane {
   padding-top: .1em;
   padding-bottom: .3em;
-  /*border-right: 4px solid rgb(40, 32, 51); */
-  /* border-left: 2px solid rgb(36, 39, 46); */
 }
-
-/* .instrument-lane:first-child {
-  border-top-left-radius: 0.25em;
-  border-top-right-radius: 0.25em;
-  border-top: 2px solid rgb(36, 39, 46);
-}
-
-.instrument-lane:last-child {
-  border-bottom-left-radius: 0.25em;
-  border-bottom-right-radius: 0.25em;
-  border-bottom: 4px solid rgb(36, 25, 51);
-} */
-
 
 .slider {
   margin: 0 1em;
@@ -87,21 +69,20 @@ section.controls {
 
 .start-button {
   padding: none;
-  font-size: 256px;
-  margin: 0 calc(50vw - .25em);
+  font-size: 2em;
   background: rgb(36, 39, 46);
   color: rgb(119, 0, 255);
   appearance: none;
   border: none;
 }
 
-.sequencer {
-  padding: 5vmax;
-  border: 1px solid white;
+section.controls  {
+  display: inline-block;
 }
 
 .lanes {
   padding: 0.5em;
+  display: inline-block;
   background: rgb(66, 54, 73);
   border-radius: .5em;
   max-width: 800px;

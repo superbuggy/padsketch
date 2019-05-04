@@ -60,7 +60,7 @@ export default class Sampler extends Component {
   }
 
   togglePlaying = () => {
-    this.setState( ({isPlaying}) => ({isPlaying: !isPlaying}))
+    this.setState( ({ isPlaying }) => ({isPlaying: !isPlaying}))
   }
   
   triggerKick = () => {
@@ -94,12 +94,12 @@ export default class Sampler extends Component {
   render () {
     const { isPlaying } = this.state
     return (
-      <div className='sampler'>
-        <button onClick={this.togglePlaying}> {isPlaying ? 'Stop' : 'Start'} </button>
+      <div className={'sampler'}>
         <Sequencer
           transport={this.props.transport}
-          isPlaying={this.state.isPlaying}
+          isPlaying={isPlaying}
           instruments={this.instruments}
+          togglePlaying={this.togglePlaying}
           triggerKick={this.triggerKick}
           triggerSnare={this.triggerSnare}
           triggerClosedHats={this.triggerClosedHats}

@@ -8,20 +8,23 @@ export default class Padsketch extends Component {
     userHasInteracted: false
   }
 
+  componentDidMount() {
+    window.addEventListener('mousemove', this.christen)
+
+  }
+  
+  componentWillUnmount() {
+    window.removeEventListener('mousemove', this.christen)
+  }
+
+
+
   christen = () => {
-    Tone.context.resume();
-    this.setState( ({ userHasInteracted }) => ({ userHasInteracted: !userHasInteracted }) )
+    Tone.context.resume();  
+    this.state.userHasInteracted && this.setState( ({ userHasInteracted }) => ({ userHasInteracted: true }) )
   }
 
   render() {
-    return (
-      <div>
-        {
-          this.state.userHasInteracted 
-            ? <Sampler transport={Tone.Transport} /> 
-            : <button className={'start-button'} onClick={this.christen}>▸</button>
-        }
-      </div>
-    )
+    return <Sampler transport={Tone.Transport} /> 
   }
 }

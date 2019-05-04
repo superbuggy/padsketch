@@ -152,13 +152,20 @@ export default class Sequencer extends Component {
           )) 
         }
         </section>
-        <RangeSlider
-          min={4} 
-          max={32} 
-          handleChange={this.changeSequenceLength} 
-          value={this.state.sequenceLength} 
-          label={'Length'}
-        />
+        <section> 
+          <div className={'controls'}>
+            <RangeSlider
+              min={4} 
+              max={32} 
+              handleChange={this.changeSequenceLength} 
+              value={this.state.sequenceLength} 
+              label={'Length'}
+              />
+            <button className={'start-button'} onClick={this.props.togglePlaying}>
+              { !this.props.isPlaying ? '▸' : '⑊'}
+            </button>
+          </div>
+        </section>
       </div>
     )
   }
