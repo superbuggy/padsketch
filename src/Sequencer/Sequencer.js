@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { generatePattern, rotate } from './utils'
+import { generatePattern, rotate } from '../utils'
 import Lane from './Lane'
 import RangeSlider from './RangeSlider'
 

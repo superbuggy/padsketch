@@ -4,7 +4,7 @@ import Tone from 'tone'
 import { TONES } from './constants'
 import { ToneCircle } from './ToneCircle'
 import { Controls } from './Controls'
-import { generatePattern, rotate } from './utils'
+import { generatePattern, rotate } from './utils-euclidean-tones'
 
 
 export default class TonesContainer extends Component {
