@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './EuclideanTones.css'
-import TonesContainer from './TonesContainer'
+import EuclideanTonesContainer from './EuclideanTonesContainer'
 
 class EuclideanTones extends Component {
 
@@ -18,7 +18,7 @@ class EuclideanTones extends Component {
   }
   render () {
     return (
-      <TonesContainer polySynth={this.state.polySynth} />
+      <EuclideanTonesContainer polySynth={this.state.polySynth} />
     )
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import RangeSlider from '../Sequencer/RangeSlider'
 
-export const Controls = ({ 
+export const EuclideanTonesControls = ({ 
   changeOffset,
   changeActiveCount,
   maxTones,

@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import Tone from 'tone'
 
 import { TONES } from './constants'
-import { ToneCircle } from './ToneCircle'
-import { Controls } from './Controls'
+import { EuclideanToneCircle } from './EuclideanToneCircle'
+import { EuclideanTonesControls } from './EuclideanTonesControls'
 import { generatePattern, rotate } from './utils-euclidean-tones'
 
 
-export default class TonesContainer extends Component {
+export default class EuclideanTonesContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -78,7 +78,7 @@ export default class TonesContainer extends Component {
 
     return (
       <div>
-        <ToneCircle
+        <EuclideanToneCircle
           tones={this.state.tones}
           activeTones={this.state.activeTones}
           activeCount={this.state.activeCount}
@@ -86,7 +86,7 @@ export default class TonesContainer extends Component {
           play={this.play}
           stop={this.stop}
         />
-        <Controls
+        <EuclideanTonesControls
           offset={this.state.offset}
           activeCount={this.state.activeCount}
           changeOffset={this.changeOffset}

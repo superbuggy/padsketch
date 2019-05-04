@@ -1,9 +1,9 @@
 import React from 'react'
-import ToneSlice from './ToneSlice'
+import ToneSlice from './EuclideanToneSlice'
 import { pitchSets } from './constants'
 
 
-export const ToneCircle = ({
+export const EuclideanToneCircle = ({
   activeTones,
   activeCount,
   tones,
