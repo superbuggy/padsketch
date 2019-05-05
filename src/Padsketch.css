@@ -60,7 +60,7 @@ div.active-cell {
   );
 }
 
-div.active-step {
+div.step-playing {
   transition: background-image 1s;
   transition: border 1s;
   background-color: rgba(119, 0, 255, .5);
