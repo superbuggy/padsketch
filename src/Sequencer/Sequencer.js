@@ -17,10 +17,10 @@ export default class Sequencer extends Component {
   initializedLanes = length => {
     const pulsesList = Array.from({length}).fill(0)
     const offsets = Array.from({length}).fill(0)
-    return this.buildLanes(length, pulsesList, offsets)
+    return this.buildLanesState(length, pulsesList, offsets)
   }
   
-  buildLanes = (length, pulsesList, offsets, lanes = {}) => {
+  buildLanesState = (length, pulsesList, offsets, lanes = {}) => {
     const instrumentNames = Object.keys(this.props.instruments)
     const builtLanes = instrumentNames.reduce((newLanes, instrument, index) => {
       const [ pulses, offset ] = [ pulsesList[index], offsets[index] ]
@@ -40,7 +40,7 @@ export default class Sequencer extends Component {
     return { sequence, offsetSequence }
   }
   
-  buildLaneState = (instrument, length, pulses, offset) => {
+  buildLaneState = (instrument, length = 0, pulses = 0, offset = 0) => {
     const { sequence, offsetSequence } = this.generateSequences(length, pulses, offset)
     return {
       [instrument]: {
@@ -123,17 +123,24 @@ export default class Sequencer extends Component {
     })
   }
   
-  // toggleStep = (instrument, step) => {
-  //   this.setState( ({ lanes }) => {
-  //     const { sequenceLength, pulses, offset } = lanes[instrument]
-  //     const newLanes = this.buildLanes(sequenceLength, pulses, offset, lanes)
-  //     newLanes[instrument].sequence[step] = !newLanes[instrument].sequence[step]
-  //     return newLanes
-  //   } )
-  // }
+  toggleStep = (instrument, step) => {
+    this.setState( ({ sequenceLength, lanes }) => {
+      const offsetSequence = lanes[instrument].offsetSequence.slice()
+      offsetSequence[step] = !offsetSequence[step]
+      return {
+        lanes: {
+          ...lanes,
+          [instrument]: {
+            ...lanes[instrument],
+            offsetSequence
+          }
+        }
+
+      }
+    } )
+  }
 
   render() {
-    console.log(this.state)
     return (
       <div className={'sequencer'}>
         <section className={'lanes'}>
@@ -148,6 +155,7 @@ export default class Sequencer extends Component {
               activeStep={this.state.activeStep}
               changePulses={this.changePulses}
               changeOffset={this.changeOffset}
+              toggleStep={this.toggleStep}
             />
           )) 
         }
