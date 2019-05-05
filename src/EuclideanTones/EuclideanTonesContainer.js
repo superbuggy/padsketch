@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Tone from 'tone'
 
 import { TONES } from './constants'
 import { EuclideanToneCircle } from './EuclideanToneCircle'
@@ -18,7 +17,6 @@ export default class EuclideanTonesContainer extends Component {
       playing: false,
       pattern: null
     }
-    this.transport = Tone.Transport
   }
 
   changeOffset = offset => {
@@ -40,7 +38,7 @@ export default class EuclideanTonesContainer extends Component {
       prevState => {
         if (prevState.pattern) prevState.pattern.dispose()
         const tones = prevState.activeTones.map(tone => `${tone}4`)
-        const pattern = new Tone.Pattern((time, note) => {
+        const pattern = new this.props.Tone.Pattern((time, note) => {
           this.props.polySynth.triggerAttackRelease(note, '2n')
         }, tones)
         pattern.start(0)
@@ -49,13 +47,13 @@ export default class EuclideanTonesContainer extends Component {
           playing: true
         }
       },
-      _ => this.transport.start()
+      _ => this.props.transport.start()
     )
   }
 
   stop = () => {
     this.setState(prevState => {
-      this.transport.stop()
+      this.props.transport.stop()
       return {
         playing: false
       }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Tone from 'tone'
 
 import Sequencer from './Sequencer'
 export default class Sampler extends Component {
@@ -43,7 +42,7 @@ export default class Sampler extends Component {
         this.togglePlaying()
       }
     })
-    const sampler = new Tone.Players(
+    const sampler = new this.props.Tone.Players(
       this.sampleMap,
       () => console.log(sampler)
     )//.sync()
