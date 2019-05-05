@@ -3,6 +3,7 @@
   --inner-circle-color: #00684e;
   --inner-circle-border-color: rgb(45, 92, 75);
   --play-button-color: rgb(88, 250, 169);
+  --euclidean-tones-background-color: rgb(22, 44, 36);
 }
 
 
@@ -12,6 +13,7 @@
   stroke: var(--inner-circle-border-color);
   stroke-width: .02;
 }
+
 .active.slice {
   fill: var(--inner-circle-color);
   stroke: var(--inner-circle-color);
@@ -24,7 +26,7 @@
   --label-color: var(--play-button-color);
   --label-color-dimmer: rgba(88, 250, 169, 0.74);
   margin: 0 auto;
-  background:rgb(22, 44, 36);
+  background: var(--euclidean-tones-background-color);
   padding: 1em;
   border-radius: 2em;
   border: .25em solid var(--inner-circle-color);
@@ -33,8 +35,9 @@
 }
 
 .inner-circle {
-  fill: var(--inner-circle-border-color);
-  stroke: var(--inner-circle-border-color);
+  fill: var(--euclidean-tones-background-color);
+  stroke: var(--euclidean-tones-background-color);
+  /* stroke: var(--inner-circle-border-color); */
   stroke-width: .02px;
 }
 
@@ -53,7 +56,6 @@ text.active, text.slice-text.info {
 }
 
 text.active {
-  stroke: #829345;
   stroke: var(--play-button-color);
   fill: var(--text-color);
   text-shadow: .25em .25em .5em var(--inner-circle-border-color);
@@ -61,36 +63,35 @@ text.active {
 }
 
 text.slice-text.info {
-  opacity: .9;
-  fill: var(--text-color);
   letter-spacing: .002em;
   font-kerning: normal;
+  opacity: .9;
   stroke: var(--play-button-color);
+  fill: var(--text-color);
   text-shadow: 1em 1em 0px var(--inner-circle-border-color);
 }
 
 svg .play-button {
+  stroke-width: .005;
   stroke-linecap: round;
   stroke: var(--inner-circle-border-color);
-  stroke-width: .005;
   fill: var(--play-button-color);
 }
 
 .slice-text {
-  fill: var(--text-color);
-  opacity: .3;
   font-size: .15px;
-  stroke: var(--inner-circle-border-color);
-  stroke-linecap: round;
-  stroke-width: 0.01;
   text-anchor: middle;
+  opacity: .3;
+  stroke-width: 0.01;
+  stroke-linecap: round;
+  stroke: var(--inner-circle-border-color);
+  fill: var(--text-color);
 }
 
 .euclidean-tones-controls {
-  /* padding-left: calc(50vw - 12em); */
+  margin: 0 auto;
   display: flex;
   justify-content: center;
-  margin: 0 auto;
   font-family: 'Germania One', cursive;
   font-size: 24px;
 }
