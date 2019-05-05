@@ -11,7 +11,8 @@ export const EuclideanToneCircle = ({
   play,
   stop
 }) => {
-  const SVG_SIZE = window.innerWidth * .7
+  const vMin = Math.min(window.innerWidth, window.innerHeight)
+  const SVG_SIZE = vMin * .7
   const VIEWBOX_ORIGIN = -1.1
   const VIEWBOX_SIZE = Math.abs(VIEWBOX_ORIGIN) * 2
 
@@ -27,7 +28,7 @@ export const EuclideanToneCircle = ({
   ))
 
   const svgStyle = {
-    margin: `0 ${(window.innerWidth - SVG_SIZE) / 2}px`
+    // margin: `0 ${(window.innerWidth - SVG_SIZE) / 2}px`
   }
 
   return (
