@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Cuprum|Germania+One|ZCOOL+XiaoWei');
-
+body{
+  background: #000000;
+}
 :root {
   --slider-width: 0.5em;
   --slider-height: 1.5em;
@@ -24,6 +26,10 @@
   background: var(--sampler-background-color);
   display: inline-block;
   /* color: rgba(195, 0, 255, 0.6); */
+  border: .25em solid var(--controls-background-color);
+  border-radius: 1em;
+  margin: 1em;
+  padding: 1em;
   text-shadow: -1px 1px 0px rgb(62, 0, 90);
 }
 
@@ -63,7 +69,6 @@ div.active-step {
 
 input[type=range].controls {
   margin: 0 1em;
-  margin-right: .5em;
 }
 
 
@@ -117,10 +122,10 @@ section>p {
 label {
   color: var(--label-color-dimmer);
   text-shadow: -1px 1px 0px rgb(62, 0, 90);    
-  /* display: inline-block; */
-  /* margin: 0 12%; */
+  margin: 0 1em;
 }
-/* css tricks */
+
+/* RangeSlider */
 
 input[type=range] {
   -webkit-appearance: none;
@@ -179,7 +184,7 @@ input[type=range]::-ms-track {
 
 input[type=range]::-ms-fill-lower {
   background: #2a6495;
-  border: 0.2px solid #010101;
+  /* border: 0.2px solid #010101; */
   border-radius: 2.6px;
   border: none;
 }
