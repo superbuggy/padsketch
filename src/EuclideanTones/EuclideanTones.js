@@ -17,9 +17,12 @@ class EuclideanTones extends Component {
     this.setState({ polySynth })
   }
   render () {
-    console.log('this.props.transport', this.props.transport)
+    console.log('this.props.transport', this.props.transport.state)
     return (
-      <EuclideanTonesContainer transport={this.props.transport} polySynth={this.state.polySynth} />
+      <EuclideanTonesContainer 
+        Tone={this.props.Tone}
+        transport={this.props.transport}
+        polySynth={this.state.polySynth} />
     )
   }
 }
