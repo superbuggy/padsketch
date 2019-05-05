@@ -42,12 +42,11 @@ export default class Sampler extends Component {
         this.togglePlaying()
       }
     })
-    const sampler = new this.props.Tone.Players(
-      this.sampleMap,
-      () => console.log(sampler)
-    )//.sync()
-    sampler.toMaster()
-    this.setState( _ => ({ sampler }) )
+    const afterSamplesLoad = () => {
+      sampler.toMaster()
+      this.setState( _ => ({ sampler }) )
+    }
+    const sampler = new this.props.Tone.Players(this.sampleMap, afterSamplesLoad)
   }
 
   startTransport = () => {
