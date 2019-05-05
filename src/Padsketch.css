@@ -7,7 +7,6 @@
   --slider-track-width: 10em;
   --slider-track-height: 1.5em;
   --slider-track-color: rgb(62, 0, 90);
-  --play-button-color: rgb(119, 0, 255);
   --sampler-background-color: rgb(36, 39, 46);
   --lanes-background-color: rgb(66, 54, 73);
   --cell-size: 1.5em;
@@ -117,8 +116,9 @@ section>p {
 
 label {
   color: var(--label-color-dimmer);
-  margin: 0 1em;
-  text-shadow: -1px 1px 0px rgb(62, 0, 90);  
+  text-shadow: -1px 1px 0px rgb(62, 0, 90);    
+  /* display: inline-block; */
+  /* margin: 0 12%; */
 }
 /* css tricks */
 
@@ -186,7 +186,7 @@ input[type=range]::-ms-fill-lower {
 
 input[type=range]::-ms-fill-upper {
   background: var(--slider-track-color);
-  border: 0.2px solid #010101;
+  /* border: 0.2px solid #010101; */
   border-radius: 2.6px;
   border: none;
 }

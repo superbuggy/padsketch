@@ -77,7 +77,7 @@ export default class EuclideanTonesContainer extends Component {
   render () {
 
     return (
-      <div>
+      <div className={'tones-container'}>
         <EuclideanToneCircle
           tones={this.state.tones}
           activeTones={this.state.activeTones}

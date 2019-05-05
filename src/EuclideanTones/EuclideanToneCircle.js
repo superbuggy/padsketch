@@ -27,14 +27,10 @@ export const EuclideanToneCircle = ({
     />
   ))
 
-  const svgStyle = {
-    // margin: `0 ${(window.innerWidth - SVG_SIZE) / 2}px`
-  }
 
   return (
     <svg
       viewBox={`${VIEWBOX_ORIGIN} ${VIEWBOX_ORIGIN} ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}
-      style={svgStyle}
       height={SVG_SIZE}
       width={SVG_SIZE}
     >

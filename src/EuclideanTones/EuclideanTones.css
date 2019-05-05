@@ -1,27 +1,38 @@
 :root {
-  --text-color: rgb(240, 250, 194);
-  --text-color-dimmed: rgba(186, 210, 98, 0.3);
-  --active-tones-background-color: rgb(163, 177, 100);
+  --text-color: rgb(155, 252, 220);
   --inner-circle-color: #00684e;
   --inner-circle-border-color: rgb(45, 92, 75);
-  --euclidean-tones-play-button-color: rgb(88, 250, 169);
+  --play-button-color: rgb(88, 250, 169);
 }
+
+
 
 .slice {
   fill: var(--inner-circle-border-color);
   stroke: var(--inner-circle-border-color);
   stroke-width: .02;
-  /* stroke-width: .001; */
-  /* stroke: #bad262; */
 }
 .active.slice {
-  fill: var(--active-tones-background-color);
-  stroke: var(--active-tones-background-color);
+  fill: var(--inner-circle-color);
+  stroke: var(--inner-circle-color);
   stroke-width: .02;
 }
 
+.tones-container {
+  --slider-color:var(--play-button-color);
+  --slider-track-color: var(--inner-circle-color);
+  --label-color: var(--play-button-color);
+  --label-color-dimmer: rgba(88, 250, 169, 0.74);
+  margin: 0 auto;
+  background:rgb(22, 44, 36);
+  padding: 1em;
+  border-radius: 2em;
+  border: .25em solid var(--inner-circle-color);
+  max-width: 70vmin;
+}
+
 .inner-circle {
-  fill: var(--inner-circle-color);
+  fill: var(--inner-circle-border-color);
   stroke: var(--inner-circle-border-color);
   stroke-width: .02px;
 }
@@ -31,7 +42,7 @@ text.slice-text {
   text-anchor: middle;
   stroke-linecap: round;
   stroke-width: .011;
-  stroke: var(--text-color-dimmed);
+  stroke: var(--inner-circle-border-color);
   paint-order: stroke;
 }
 
@@ -42,21 +53,26 @@ text.active, text.slice-text.info {
 
 text.active {
   stroke: #829345;
+  stroke: var(--play-button-color);
+  fill: var(--text-color);
+  text-shadow: .25em .25em .5em var(--inner-circle-border-color);
+  opacity: .9;
 }
 
 text.slice-text.info {
-  opacity: .8;
+  opacity: .9;
   fill: var(--text-color);
   letter-spacing: .002em;
   font-kerning: normal;
-  stroke: var(--euclidean-tones-play-button-color);
+  stroke: var(--play-button-color);
+  text-shadow: 1em 1em 0px var(--inner-circle-border-color);
 }
 
 svg .play-button {
   stroke-linecap: round;
   stroke: var(--inner-circle-border-color);
   stroke-width: .005;
-  fill: var(--euclidean-tones-play-button-color);
+  fill: var(--play-button-color);
 }
 
 .slice-text {
@@ -70,7 +86,10 @@ svg .play-button {
 }
 
 .euclidean-tones-controls {
-  padding-left: calc(50vw - 12em);
+  /* padding-left: calc(50vw - 12em); */
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
   font-family: 'Germania One', cursive;
   font-size: 24px;
 }
