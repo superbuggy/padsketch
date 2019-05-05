@@ -32,7 +32,7 @@ const ToneSlice = props => {
         d={pathData}
         className={ props.active ? 'active slice' :'slice' }
       />
-      <text className={'slice-text'} dx={'0em'} dy={'.5em'} x={textX} y={textY}>
+      <text className={props.active ? 'active slice-text' :'slice-text'} dx={'0em'} dy={'.5em'} x={textX} y={textY}>
         {props.tone}
       </text>
     </g>

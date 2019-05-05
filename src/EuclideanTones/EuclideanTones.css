@@ -1,33 +1,76 @@
 :root {
-  --activeTonesAndInfoColor: #F5FFAF;
-  --activeTonesBGColor: #bad262d0;
+  --text-color: rgb(240, 250, 194);
+  --text-color-dimmed: rgba(186, 210, 98, 0.3);
+  --active-tones-background-color: rgb(163, 177, 100);
+  --inner-circle-color: #00684e;
+  --inner-circle-border-color: rgb(45, 92, 75);
+  --euclidean-tones-play-button-color: rgb(88, 250, 169);
 }
 
 .slice {
-  fill: transparent;
-  stroke-width: .001;
-  stroke: #bad262;
+  fill: var(--inner-circle-border-color);
+  stroke: var(--inner-circle-border-color);
+  stroke-width: .02;
+  /* stroke-width: .001; */
+  /* stroke: #bad262; */
 }
 .active.slice {
-  fill: var(--activeTonesBGColor);
+  fill: var(--active-tones-background-color);
+  stroke: var(--active-tones-background-color);
+  stroke-width: .02;
 }
 
 .inner-circle {
-  fill: #086800;
+  fill: var(--inner-circle-color);
+  stroke: var(--inner-circle-border-color);
+  stroke-width: .02px;
 }
 
-text{
+text.slice-text {
   font-family: 'Germania One', cursive;
+  text-anchor: middle;
+  stroke-linecap: round;
+  stroke-width: .011;
+  stroke: var(--text-color-dimmed);
+  paint-order: stroke;
+}
+
+text.active, text.slice-text.info {
+  fill: var(--text-color);
+  opacity: 1;
+}
+
+text.active {
+  stroke: #829345;
+}
+
+text.slice-text.info {
+  opacity: .8;
+  fill: var(--text-color);
+  letter-spacing: .002em;
+  font-kerning: normal;
+  stroke: var(--euclidean-tones-play-button-color);
+}
+
+svg .play-button {
+  stroke-linecap: round;
+  stroke: var(--inner-circle-border-color);
+  stroke-width: .005;
+  fill: var(--euclidean-tones-play-button-color);
 }
 
 .slice-text {
-  fill: var(--activeTonesAndInfoColor);
+  fill: var(--text-color);
+  opacity: .3;
   font-size: .15px;
-  /* fontSize: '0.12px'; */
-  /* stroke: props.active ? #00000033 : transparent; */
+  stroke: var(--inner-circle-border-color);
   stroke-linecap: round;
   stroke-width: 0.01;
-  /* paintOrder: props.active ? stroke : fill; */
   text-anchor: middle;
 }
 
+.euclidean-tones-controls {
+  padding-left: calc(50vw - 12em);
+  font-family: 'Germania One', cursive;
+  font-size: 24px;
+}

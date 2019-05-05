@@ -161,7 +161,7 @@ export default class Sequencer extends Component {
               value={this.state.sequenceLength} 
               label={'Length'}
               />
-            <button className={'start-button'} onClick={this.props.togglePlaying}>
+            <button className={'play-button'} onClick={this.props.togglePlaying}>
               { !this.props.isPlaying ? '▸' : '⑊'}
             </button>
           </div>

@@ -7,10 +7,13 @@
   --slider-track-width: 10em;
   --slider-track-height: 1.5em;
   --slider-track-color: rgb(62, 0, 90);
-  --start-button-color: rgb(119, 0, 255);
+  --play-button-color: rgb(119, 0, 255);
   --sampler-background-color: rgb(36, 39, 46);
   --lanes-background-color: rgb(66, 54, 73);
   --cell-size: 1.5em;
+  --label-color: rgb(255, 230, 0);
+  --label-color-dimmer: rgba(255, 255, 0, 0.74);
+  --controls-background-color: rgb(59, 49, 66);
 }
 
 .sampler {
@@ -45,9 +48,9 @@
 div.active-cell {
   transition: background-image 1s;
   background-image: radial-gradient(
-    rgba(238, 255, 0, 0.8),
-    rgba(255, 153, 0, 0.3),
-    rgba(255, 238, 0, 0.1),
+    rgba(250, 239, 88, 0.8),
+    rgba(0, 255, 115, 0.3),
+    rgba(0, 119, 255, 0.1),
     rgb(36, 39, 46)
   );
 }
@@ -68,7 +71,7 @@ input[type=range].controls {
 section.controls {
   padding-left: .5em;
   margin-bottom: .3em;
-  background: rgb(59, 49, 66);
+  background: var(--controls-background-color);
   border-radius: 0.5em;
 }
 
@@ -81,11 +84,11 @@ section.controls {
   margin: 0 1em;
 }
 
-.start-button {
+.play-button {
   padding: none;
   font-size: 2em;
   background: rgb(36, 39, 46);
-  color: var(--start-button-color);
+  color: var(--play-button-color);
   appearance: none;
   border: none;
 }
@@ -109,11 +112,11 @@ section>p {
   padding: 0;
   margin: 0;  
   margin-right: 1em;
-  color: rgb(255, 230, 0);
+  color: var(--label-color);
 }
 
 label {
-  color: rgba(255, 255, 0, 0.74);
+  color: var(--label-color-dimmer);
   margin: 0 1em;
   text-shadow: -1px 1px 0px rgb(62, 0, 90);  
 }

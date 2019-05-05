@@ -11,7 +11,7 @@ export const EuclideanToneCircle = ({
   play,
   stop
 }) => {
-  const SVG_SIZE = window.innerHeight * .7
+  const SVG_SIZE = window.innerWidth * .7
   const VIEWBOX_ORIGIN = -1.1
   const VIEWBOX_SIZE = Math.abs(VIEWBOX_ORIGIN) * 2
 
@@ -43,18 +43,10 @@ export const EuclideanToneCircle = ({
         cy={0}
         r={0.6}
       />
-      <text className={'slice-text'}
-        x={0}
-        y={0}
-        textAnchor={'middle'}
-        strokeLinecap={'round'}
-        strokeWidth={0.001}
-        stroke={'#829345d0'}
-        paintOrder={'stroke'}
-      >
+      <text className={'slice-text info'} x={0} y={0}>
         {pitchSets[activeCount] ? `${pitchSets[activeCount]}` : ''}
       </text>
-      <polygon className={'slice-text'}
+      <polygon className={'play-button'}
         onClick={playing ? stop : play}
         points={playing ? '-0.08, 0.20, -0.08, 0.36, 0.08, 0.36, 0.08, 0.20' : '-0.05, 0.2  -0.05, 0.4  0.10, 0.3'}
       />
