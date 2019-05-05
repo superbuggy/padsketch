@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Sampler from './Sequencer/Sampler'
 import Tone from 'tone'
 import './Padsketch.css'
+import EuclideanTones from './EuclideanTones/EuclideanTones'
 
 export default class Padsketch extends Component {
   state = {
@@ -25,6 +26,11 @@ export default class Padsketch extends Component {
   }
 
   render() {
-    return <Sampler transport={Tone.Transport} /> 
+    return (
+      <div>
+        <Sampler transport={Tone.Transport} Tone={Tone}/>
+        <EuclideanTones transport={Tone.Transport} Tone={Tone} />
+      </div>
+    ) 
   }
 }
