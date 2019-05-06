@@ -65,11 +65,13 @@ export function generatePattern (length, pulses) {
 export function rotate (array, times) {
   if (!array.length) return []
   if (!times) return array
+  const isRotatingLeft = times < 0
   let rotatedArray = array.slice()
   let count = 0
-  while (count < times) {
-    rotatedArray.unshift(rotatedArray.pop()) //rotate right
-    count += 1
+  while (count++ < Math.abs(times)) {
+    isRotatingLeft 
+      ? rotatedArray.push(rotatedArray.shift())
+      : rotatedArray.unshift(rotatedArray.pop())
   }
   return rotatedArray
 }
