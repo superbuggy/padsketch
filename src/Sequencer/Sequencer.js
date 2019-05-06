@@ -125,14 +125,17 @@ export default class Sequencer extends Component {
   
   toggleStep = (instrument, step) => {
     this.setState( ({ sequenceLength, lanes }) => {
+      const { offset } = lanes[instrument]
       const offsetSequence = lanes[instrument].offsetSequence.slice()
       offsetSequence[step] = !offsetSequence[step]
+      const sequence = rotate(offsetSequence, -offset)
       return {
         lanes: {
           ...lanes,
           [instrument]: {
             ...lanes[instrument],
-            offsetSequence
+            offsetSequence,
+            sequence
           }
         }
 
